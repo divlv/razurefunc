@@ -16,7 +16,7 @@ http_method_not_allowed <- list(
 hello_handler <- list(
   GET = function (request) {
     list(body=paste(
-      "This is R-code, working from within Docker container, implemented as Azure Function. ::: Hello,",
+      "This is R-code, working from within Docker container, implemented as Azure Function. -=- Hello,",
       if(substr(request$QUERY_STRING,1,6)=="?name=")
         substr(request$QUERY_STRING,7,40) else "World",
       sep=" "))
