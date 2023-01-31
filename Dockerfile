@@ -24,4 +24,4 @@ EXPOSE 80
 RUN R -e "install.packages('plumber')"
 
 # when the container starts, start the main R script
-ENTRYPOINT ["Rscript", "execute_plumber.R"]
+ENTRYPOINT ["Rscript", "main.R"]
