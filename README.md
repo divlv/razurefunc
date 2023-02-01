@@ -21,8 +21,56 @@ Start the API locally:
 docker run -p 80:80 -it emergn/razurefunc:latest
 ```
 
-Then go to `http://my_host_i_started_container_on/__docs__/` to see the Swagger UI.
+Then go to `http://my_host_i_started_container_on/__docs__/` to see the Swagger UI:
+
+![basic.png](basic.png "")
+
+
+## Extend the basic image
+
+To speed up the compilation process, you can inherit from the basic (precompiled) image and add your own code to it.
+
+`Dockerfile` example:
+
+```Dockerfile
+FROM emergn/razurefunc:latest
+
+# copy/overwrite file from the current directory into the [basic]container:
+COPY services.R /application/services.R
+```
+
+Custom `services.R` file example:
+```R
+library(plumber)
+
+#* @apiTitle My Mega API: New image, based on BASIC one.
+#* @apiDescription API REST services, written in R. This image was inherited from the BASE image!
+#* @apiVersion 1.0
+
+
+#* Echo back the input
+#* @param msg The message to echo
+#* @get /echo
+function(msg="") {
+  list(msg = paste0("The message is: '", msg, "'"))
+}
+```
+Custom image files can be found in the `/custom` folder of the repository.
+
+Place these 2 files (`Dockerfile` and `services.R`) in a separate folder, then build and run the container:
+
+```bash
+docker build -t mymegaapi:latest .
+
+docker run -p 80:80 -it mymegaapi:latest
+```
+
+Go to `http://my_host_i_started_container_on/__docs__/` to see the updated custom Swagger UI:
+
+![inherited.png](inherited.png "")
+
+
 
 ## Start on Azure:
 
-How to start the same Docker image as Azure Function App: please, proceed to "Create supporting Azure resources for your function" section of [this Microsoft documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-function-linux-custom-image?pivots=programming-language-other&tabs=in-process%2Cbash%2Cazure-cli&WT.mc_id=aiml-11825-davidsmi#create-supporting-azure-resources-for-your-function).
+To start the same Docker image as Azure Function App: please, proceed to "Create supporting Azure resources for your function" section of [this Microsoft documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-create-function-linux-custom-image?pivots=programming-language-other&tabs=in-process%2Cbash%2Cazure-cli&WT.mc_id=aiml-11825-davidsmi#create-supporting-azure-resources-for-your-function).

@@ -6,7 +6,7 @@
 # libraries
 library(plumber)
 
-#* @apiTitle Vision Insight API: BASIC DOCKER IMAGE
+#* @apiTitle My Super API: BASIC DOCKER IMAGE
 #* @apiDescription API REST services, written in R. This basic Docker Image should be used as a base for other images.
 #* @apiVersion 1.0
 
