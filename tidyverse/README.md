@@ -1,6 +1,8 @@
 
 # Tidyverse version
 
+## emergn/razurefunc:tidyverse
+
 This is special version of *razurefunc* with preinstalled **Tidyverse** packages.
 
 Check the `Dockerfile` which is based on the main version - `FROM emergn/razurefunc:latest`.
