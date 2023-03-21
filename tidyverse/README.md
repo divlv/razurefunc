@@ -13,7 +13,12 @@ RUN apt-get install -y r-cran-tidyverse
 ```
 We've installed Tidyverse from CRAN repository.
 
+Default started Tidyverse-container should look like this:
+![tidyverse.png](tidyverse.png "")
+
+
 Build your own Docker image, based on this one:
+
 
 ```Dockerfile
 FROM emergn/razurefunc:tidyverse
